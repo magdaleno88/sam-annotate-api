@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  image: one
+  classification_class: one
+  notes: MyText
+
+two:
+  user: two
+  image: two
+  classification_class: two
+  notes: MyText
