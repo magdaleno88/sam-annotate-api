@@ -1,24 +1,60 @@
-# README
+# SAM Annotate API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+API REST experimental para organizar imágenes, tareas de clasificación y anotaciones. El proyecto modela la relación entre imágenes, clases, tareas y usuarios, con una base PostgreSQL y almacenamiento de archivos mediante Active Storage.
 
-Things you may want to cover:
+## Qué implementa actualmente
 
-* Ruby version
+- Registro y consulta de imágenes con un archivo adjunto y un código de paciente.
+- Consulta de tareas y recuperación de la siguiente imagen pendiente de una tarea.
+- Creación de anotaciones que relacionan una imagen, una clase y un usuario.
+- Modelo de datos para asignar imágenes a tareas y conservar sus anotaciones.
+- Flujo de CI con análisis de seguridad, estilo y ejecución de pruebas.
 
-* System dependencies
+## Tecnologías
 
-* Configuration
+Ruby 3.4.4 · Rails 8.1 · PostgreSQL · Active Storage · Devise
 
-* Database creation
+## Endpoints implementados
 
-* Database initialization
+| Método | Ruta | Función |
+| --- | --- | --- |
+| `GET` | `/api/images` | Lista las imágenes |
+| `POST` | `/api/images` | Crea una imagen con `patient_code` y `file` |
+| `GET` | `/api/tasks` | Lista las tareas |
+| `GET` | `/api/tasks/:id` | Muestra una tarea |
+| `GET` | `/api/tasks/:id/next_image` | Devuelve la primera imagen pendiente de la tarea |
+| `POST` | `/api/annotations` | Crea una anotación con `image_id`, `classification_class_id` y `notes` |
 
-* How to run the test suite
+Las rutas de Rails incluyen recursos adicionales, pero la tabla describe únicamente las acciones que aparecen implementadas en los controladores.
 
-* Services (job queues, cache servers, search engines, etc.)
+## Ejecutar en desarrollo
 
-* Deployment instructions
+Requiere Ruby 3.4.4, Bundler y PostgreSQL. Configura las credenciales de la base de datos de forma local antes de iniciar el servidor.
 
-* ...
+```bash
+bundle install
+bin/rails db:prepare
+bin/rails server
+```
+
+Con el servidor iniciado, la API estará disponible en `http://localhost:3000`. Para ejecutar la suite incluida:
+
+```bash
+bin/rails test
+```
+
+## Modelo de datos
+
+```text
+User ──< Annotation >── Image ──< TaskImage >── Task
+                  │
+                  └── ClassificationClass
+```
+
+Los archivos de imagen se almacenan mediante Active Storage. `TaskImage` permite asociar una imagen a una o varias tareas.
+
+## Estado y límites
+
+Este repositorio es un **prototipo en desarrollo**. Los archivos de prueba revisados contienen marcadores de posición y todavía necesitan casos que comprueben la API. La creación de anotaciones asigna actualmente un usuario fijo, por lo que debe vincularse al usuario autenticado antes de exponer el servicio. También es necesario sacar la contraseña de PostgreSQL del archivo de configuración y llevarla a variables de entorno.
+
+No cargues imágenes clínicas reales ni datos personales en una instalación pública sin completar antes autenticación, autorización y controles de privacidad.
