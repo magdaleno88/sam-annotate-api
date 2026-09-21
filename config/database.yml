@@ -16,7 +16,7 @@ default: &default
   adapter: postgresql
   encoding: unicode
   username: postgres
-  password: jesus
+  password: <%= ENV["SAM_ANNOTATE_DATABASE_PASSWORD"] %>
   host: localhost
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling

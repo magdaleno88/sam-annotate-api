@@ -29,7 +29,7 @@ Las rutas de Rails incluyen recursos adicionales, pero la tabla describe únicam
 
 ## Ejecutar en desarrollo
 
-Requiere Ruby 3.4.4, Bundler y PostgreSQL. Configura las credenciales de la base de datos de forma local antes de iniciar el servidor.
+Requiere Ruby 3.4.4, Bundler y PostgreSQL. Define `SAM_ANNOTATE_DATABASE_PASSWORD` en tu entorno local con la contraseña de PostgreSQL antes de preparar la base de datos. No la agregues al repositorio.
 
 ```bash
 bundle install
@@ -55,6 +55,6 @@ Los archivos de imagen se almacenan mediante Active Storage. `TaskImage` permite
 
 ## Estado y límites
 
-Este repositorio es un **prototipo en desarrollo**. Los archivos de prueba revisados contienen marcadores de posición y todavía necesitan casos que comprueben la API. La creación de anotaciones asigna actualmente un usuario fijo, por lo que debe vincularse al usuario autenticado antes de exponer el servicio. También es necesario sacar la contraseña de PostgreSQL del archivo de configuración y llevarla a variables de entorno.
+Este repositorio es un **prototipo en desarrollo**. Los archivos de prueba revisados contienen marcadores de posición y todavía necesitan casos que comprueben la API. La creación de anotaciones asigna actualmente un usuario fijo, por lo que debe vincularse al usuario autenticado antes de exponer el servicio. La contraseña que estuvo publicada en versiones anteriores debe cambiarse; retirarla de la versión actual no la borra del historial de Git.
 
 No cargues imágenes clínicas reales ni datos personales en una instalación pública sin completar antes autenticación, autorización y controles de privacidad.
