@@ -2,8 +2,8 @@
 
 one:
   patient_code: MyString
-  status: MyString
+  status: pending
 
 two:
   patient_code: MyString
-  status: MyString
+  status: complete
