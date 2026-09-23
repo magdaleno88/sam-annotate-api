@@ -15,7 +15,7 @@ jobs:
       - name: Allow lockfile changes
         run: bundle config set frozen false
       - name: Update affected gems
-        run: bundle update nokogiri rails-html-sanitizer websocket-driver json mail msgpack net-imap
+        run: bundle update rails concurrent-ruby nokogiri rails-html-sanitizer websocket-driver json mail msgpack net-imap
       - name: Preserve both supported platforms
         run: bundle lock --add-platform x64-mingw-ucrt x86_64-linux-gnu
       - name: Commit lockfile update
