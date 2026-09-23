@@ -1,0 +1,32 @@
+name: Refresh vulnerable gems
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Update affected gems
+        run: bundle update nokogiri rails-html-sanitizer websocket-driver
+      - name: Preserve both supported platforms
+        run: bundle lock --add-platform x64-mingw-ucrt x86_64-linux-gnu
+      - name: Commit lockfile update
+        run: |
+          git diff --check
+          if git diff --quiet -- Gemfile.lock; then
+            echo "Gemfile.lock is already current"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Gemfile.lock
+          git commit -m "Update vulnerable Ruby dependencies"
+          git push
