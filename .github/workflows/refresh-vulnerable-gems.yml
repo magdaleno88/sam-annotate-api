@@ -12,8 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
+      - name: Allow lockfile changes
+        run: bundle config set frozen false
       - name: Update affected gems
         run: bundle update nokogiri rails-html-sanitizer websocket-driver
       - name: Preserve both supported platforms
