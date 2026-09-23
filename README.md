@@ -1,5 +1,7 @@
 # SAM Annotate API
 
+[Caso de estudio / Case study](docs/CASE_STUDY.md) · [Ejemplo de API con datos ficticios](docs/API_EXAMPLE.md) · [English summary](#english-summary)
+
 API REST experimental para organizar imágenes, tareas de clasificación y anotaciones. El proyecto modela la relación entre imágenes, clases, tareas y usuarios, con una base PostgreSQL y almacenamiento de archivos mediante Active Storage.
 
 ## Qué implementa actualmente
@@ -55,6 +57,10 @@ Los archivos de imagen se almacenan mediante Active Storage. `TaskImage` permite
 
 ## Estado y límites
 
-Este repositorio es un **prototipo en desarrollo**. Los archivos de prueba revisados contienen marcadores de posición y todavía necesitan casos que comprueben la API. La creación de anotaciones asigna actualmente un usuario fijo, por lo que debe vincularse al usuario autenticado antes de exponer el servicio. La contraseña que estuvo publicada en versiones anteriores debe cambiarse; retirarla de la versión actual no la borra del historial de Git.
+Este repositorio es un **prototipo en desarrollo**. Hay pruebas para la consulta de tareas e imágenes pendientes; otras rutas todavía necesitan cobertura. La creación de anotaciones asigna actualmente un usuario fijo, por lo que debe vincularse al usuario autenticado antes de exponer el servicio. La contraseña que estuvo publicada en versiones anteriores debe cambiarse; retirarla de la versión actual no la borra del historial de Git.
 
 No cargues imágenes clínicas reales ni datos personales en una instalación pública sin completar antes autenticación, autorización y controles de privacidad.
+
+## English summary
+
+SAM Annotate API is an experimental Rails backend for image classification tasks and annotations. It uses PostgreSQL and Active Storage to organize task images and files. Inspect the [fictional API example](docs/API_EXAMPLE.md) and read the [case study](docs/CASE_STUDY.md) for its architecture and current limitations. Authentication, authorization and task reservation need work before multi-user or clinical use.
